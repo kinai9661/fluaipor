@@ -1,111 +1,89 @@
-# 🎨 AI Generator Flux Pure (v2.4.0)
+# 🎨 AI Generator Flux Ultimate (v2.6.0)
 
 <div align="center">
 
-![版本](https://img.shields.io/badge/版本-v2.4.0-f59e0b?style=for-the-badge&logo=star&logoColor=white)
-![许可证](https://img.shields.io/badge/许可证-Apache_2.0-3b82f6?style=for-the-badge&logo=apache&logoColor=white)
+![版本](https://img.shields.io/badge/版本-v2.6.0-f59e0b?style=for-the-badge&logo=star&logoColor=white)
+![許可證](https://img.shields.io/badge/許可證-Apache_2.0-3b82f6?style=for-the-badge&logo=apache&logoColor=white)
 ![部署](https://img.shields.io/badge/部署-Cloudflare_Workers-orange?style=for-the-badge&logo=cloudflare&logoColor=white)
-![模型](https://img.shields.io/badge/模型-Flux_Schnell-brightgreen?style=for-the-badge&logo=ai&logoColor=white)
+![模型](https://img.shields.io/badge/模型-Flux_Pro-brightgreen?style=for-the-badge&logo=ai&logoColor=white)
 
-**极简纯粹的 AI 绘画 API 转换器 · 专为 Flux Schnell 模型打造 · 单文件部署奇迹**
+**全功能 AI 繪畫 API 轉換器 · 支持多圖生成 + 風格預設 + 歷史記錄 + NSFW**
 
-> 🧠 **哲学思考**: 在这个代码即思想的时代，我们不仅是程序员，更是思想的建筑师。这个项目是一次减法的艺术实践——剥离繁杂，回归核心，让你与 AI 创造力之间，只隔一个 API 的距离。
-
-[![部署到 Cloudflare](https://img.shields.io/badge/🚀_一键部署-Cloudflare_Workers-ff6900?style=for-the-badge&logo=cloudflare&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/lza6/ai-generator-2api-cfwork)
-[![在线演示](https://img.shields.io/badge/🎮_在线演示-开发者驾驶舱-00d26a?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/lza6/ai-generator-2api-cfwork)
+[![部署到 Cloudflare](https://img.shields.io/badge/🚀_一鍵部署-Cloudflare_Workers-ff6900?style=for-the-badge&logo=cloudflare&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
 
 </div>
 
 ---
 
-## ✨ 核心特性
+## ✨ 新功能亮點 (v2.6.0)
 
 <div align="center">
 
-| 🚀 极致性能 | 🎯 精准专注 | 🔧 智能调试 |
-|:---:|:---:|:---|
-| **单文件架构**<br>极致精简，高效运行 | **专为 Flux**<br>深度优化，最佳体验 | **透明日志**<br>完整追踪，轻松排查 |
+| 🖼️ 多圖生成 | 🎨 風格預設 | 📚 歷史記錄 | 🔞 NSFW 支持 |
+|:---:|:---:|:---:|:---:|
+| **1-4 張圖片**<br>一次生成多張 | **10 種風格**<br>預設模板 | **KV 存儲**<br>雲端保存 | **成人模型**<br>合法支持 |
 
 </div>
 
-### 🎨 功能亮点
+### 🎆 核心特性
 
-- **🚀 纯粹体验**: 专注文生图，移除所有冗余功能，性能最大化
-- **🎯 模型锁定**: 专为 `flux-schnell` 深度优化，无需选择困难
-- **🔍 深度透视**: 全新开发者驾驶舱，实时监控请求全链路
-- **⚡️ 一键部署**: Cloudflare Workers 零配置部署，5分钟上线
-- **💎 成本优化**: 智能利用上游服务，实现近乎零成本 AI 绘画
+- **✨ 多張圖片生成**: 一次生成 1-4 張圖片，提升效率
+- **🎨 風格預設系統**: 10 種內置藝術風格（寫實、動漫、賭博龐克等）
+- **📚 完整歷史記錄**: Cloudflare KV 雲端存儲 + LocalStorage 本地備份
+- **📊 統計分析**: 按模型、風格、日期分類統計
+- **📥 數據導出**: 支持 JSON/CSV 格式導出
+- **🔞 成人內容**: 支持 Flux Adult 模型（flux-kontext-por）
+- **🗑️ 記錄管理**: 單筆刪除、批量導出
 
 ---
 
-## 🏗️ 架构总览
+## 🚀 快速開始
 
-<div align="center">
+### 方案一：一鍵部署（推薦）
 
-```mermaid
-flowchart TD
-    A[🖥️ 用户/第三方应用] --> B{🔄 Cloudflare Worker}
-    
-    B --> C[🎭 身份伪装]
-    C --> D[💳 积分扣除]
-    D --> E[🎨 图像生成]
-    E --> F[📦 结果解析]
-    
-    F --> G[🔼 上游服务<br/>ai-image-generator.co]
-    G --> H[🖼️ 返回图像数据]
-    
-    H --> I[✨ 格式转换]
-    I --> J[📤 返回用户]
-    
-    B --> K[🌐 Web UI]
-    K --> L[📊 实时监控面板]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style G fill:#fff3e0
-    style K fill:#e8f5e8
-```
+1. **點擊部署按鈕** → 登入 Cloudflare 帳戶
+2. **項目命名** → 例如 `my-flux-api`
+3. **配置環境變數**:
+   - `API_MASTER_KEY`: 你的訪問密鑰（必須）
+4. **儲存部署** → 完成！🎉
 
-</div>
-
----
-
-## 🚀 快速开始
-
-### 方案一：一键部署（推荐）
-
-<div align="center">
-
-[![部署到 Cloudflare Workers](https://img.shields.io/badge/点击部署-Cloudflare_Workers-ff6900?style=for-the-badge&logo=cloudflare&logoColor=white&labelColor=2d2d2d)](https://deploy.workers.cloudflare.com/?url=https://github.com/lza6/ai-generator-2api-cfwork)
-
-</div>
-
-**部署步骤:**
-
-1. **点击上方按钮** → 登录 Cloudflare 账户
-2. **项目命名** → 例如 `my-ai-painter`
-3. **配置环境变量**:
-   - 进入 Worker 设置 → 变量
-   - 添加 `API_MASTER_KEY` (你的访问密钥)
-   - **重要**: 点击 🔒 加密按钮
-4. **保存部署** → 完成！🎉
-
-你的 API 地址: `https://my-ai-painter.your-subdomain.workers.dev`
-
-### 方案二：手动部署
+### 方案二：手動部署
 
 ```bash
-# 克隆项目
-git clone https://github.com/lza6/ai-generator-2api-cfwork.git
-cd ai-generator-2api-cfwork
+# 克隆倉庫
+git clone https://github.com/kinai9661/fluaipor.git
+cd fluaipor
 
-# 安装 Wrangler CLI
+# 安裝 Wrangler
 npm install -g wrangler
 
-# 登录 Cloudflare
+# 登入 Cloudflare
 wrangler login
 
-# 部署项目
+# 部署
+wrangler deploy
+```
+
+### 💾 KV 存儲配置（啟用歷史記錄）
+
+1. **創建 KV Namespace**:
+```bash
+wrangler kv:namespace create "IMAGE_HISTORY"
+```
+
+2. **在 `wrangler.toml` 中配置**:
+```toml
+name = "fluaipor"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "IMAGE_HISTORY"
+id = "YOUR_KV_NAMESPACE_ID"  # 從上一步獲取
+```
+
+3. **重新部署**:
+```bash
 wrangler deploy
 ```
 
@@ -113,222 +91,214 @@ wrangler deploy
 
 ## 🎮 使用指南
 
-### 1. 🌐 开发者驾驶舱（Web UI）
+### 1. 🌐 Web 界面
 
-直接访问你的 Worker 地址体验完整功能：
+訪問 Worker 地址體驗完整功能：
 
 ```
-https://你的项目名.你的子域名.workers.dev
+https://你的項目名.workers.dev
 ```
 
-**功能特色:**
-- 🎛️ **实时参数调整** - 提示词、图片比例一键配置
-- 👁️ **请求透明化** - 完整追踪从伪装到生成的每一步
-- 🎨 **即时预览** - 生成结果实时展示
-- 📝 **智能日志** - 详细调试信息，问题定位无忧
+**功能面板**:
+- 🖼️ **Gallery**: 圖片生成主面板
+- 📚 **History**: 歷史記錄瀏覽
+- 📊 **Stats**: 統計數據分析
 
-### 2. 🤖 对接第三方应用
+### 2. 🤖 API 端點
 
-以 **ChatGPT-Next-Web** 为例：
-
-```yaml
-# 配置示例
-接口地址: https://你的项目名.你的子域名.workers.dev/v1
-API密钥: 你在环境变量中设置的 API_MASTER_KEY
-模型选择: flux-schnell
+#### 聊天接口（支持多圖）
+```bash
+curl -X POST https://your-worker.workers.dev/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "flux-1.1-pro",
+    "messages": [{"role": "user", "content": "a cyberpunk city"}],
+    "n": 3,
+    "style": "cyberpunk"
+  }'
 ```
 
-**配置步骤:**
-1. 打开 ChatGPT-Next-Web 设置
-2. 填入上述配置信息
-3. 选择 `flux-schnell` 模型
-4. 输入提示词如"宇航服猫在月球喝咖啡" 🐱👨‍🚀🌕☕
+#### 圖片生成接口
+```bash
+curl -X POST https://your-worker.workers.dev/v1/images/generations \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "a beautiful sunset",
+    "model": "flux-schnell",
+    "n": 2,
+    "size": "16:9",
+    "style": "realistic"
+  }'
+```
+
+#### 歷史記錄 API
+```bash
+# 獲取歷史
+GET /v1/history?limit=50
+
+# 導出記錄
+GET /v1/history/export?format=json
+GET /v1/history/export?format=csv
+
+# 刪除記錄
+POST /v1/history/delete
+{"id": "record-id"}
+
+# 統計數據
+GET /v1/history/stats
+```
+
+#### 風格列表
+```bash
+GET /v1/styles
+```
 
 ---
 
-## 🔧 技术深度解析
+## 🎨 風格預設
 
-### 核心架构流程
+| 風格 ID | 名稱 | 描述 |
+|---------|------|------|
+| `realistic` | 寫實風 | 高清照片質感，8K 解析度 |
+| `anime` | 動漫風 | 日本動漫藝術風格 |
+| `cyberpunk` | 跭博龐克 | 未來城市、霸虹燈 |
+| `oil-painting` | 油畫風 | 古典藝術質感 |
+| `watercolor` | 水彩風 | 柔和色彩、藝術感 |
+| `3d-render` | 3D 渲染 | Unreal Engine 高品質 CGI |
+| `sketch` | 素描風 | 銉筆手繪風格 |
+| `fantasy` | 奇幻風 | 魔幻史詩風格 |
+| `minimalist` | 極簡風 | 現代簡約設計 |
+| `nsfw` | 成人風 🔞 | 藝術裸體、成熟主題 |
+
+---
+
+## 📊 模型對比
+
+| 模型 | 速度 | 品質 | 費用 | 特點 |
+|------|------|------|------|------|
+| `flux-schnell` | ⚡️ 快 | ⭐️⭐️⭐️ | 1 學分 | 適合快速生成 |
+| `flux-1.1-pro` | 🐢 中 | ⭐️⭐️⭐️⭐️⭐️ | 2 學分 | 專業級品質 |
+| `flux-kontext-por` | ⚡️ 快 | ⭐️⭐️⭐️⭐️ | 1 學分 | 成人內容 🔞 |
+
+---
+
+## 🔧 配置參數
+
+### 環境變數
+
+| 變數名 | 必須 | 預設值 | 說明 |
+|----------|------|---------|------|
+| `API_MASTER_KEY` | 是 | - | API 訪問密鑰 |
+| `IMAGE_HISTORY` (KV) | 否 | - | 歷史記錄存儲 |
+
+### 請求參數
+
+| 參數 | 類型 | 範圍 | 說明 |
+|------|------|------|------|
+| `n` | 數字 | 1-4 | 生成圖片數量 |
+| `style` | 字串 | - | 風格預設 ID |
+| `model` | 字串 | - | 模型選擇 |
+| `size` | 字串 | 1:1, 16:9, 9:16 | 圖片比例 |
+
+---
+
+## ⚠️ 重要提醒
+
+### 成人內容使用聲明
+
+本項目支持成人內容模型（`flux-kontext-por`），**但請務必遵守以下規定**：
+
+1. ✅ **合法使用**: 僅在法律允許的地區使用
+2. ✅ **年齡限制**: 使用者必須年滿 18 歲
+3. ❌ **禁止用途**: 不得用於非法、不道德的目的
+4. ⚠️ **責任聲明**: 開發者不對濱用行為負責
+
+### 技術風險
+
+- 本項目涉及請求偽造技術，可能違反目標服務的使用條款
+- 仅供學習研究使用，不建議用於生產環境
+- 使用前請充分了解相關法律風險
+
+---
+
+## 📚 技術架構
+
+### 系統流程
 
 ```mermaid
-sequenceDiagram
-    participant U as 用户
-    participant W as Worker
-    participant S as 上游服务
-    
-    U->>W: 📨 OpenAI 格式请求
-    Note over W: 🎭 身份伪装阶段
-    W->>W: generateFingerprint()
-    W->>W: generateRandomIP()
-    W->>W: getFakeHeaders()
-    
-    Note over W: 🔄 上游交互阶段
-    W->>S: 💳 扣除积分请求
-    S-->>W: 积分确认
-    W->>S: 🎨 发送绘画指令
-    S-->>W: 返回图片数据
-    
-    Note over W: ✨ 格式转换
-    W->>W: 转换为 OpenAI 格式
-    W-->>U: 📤 返回标准化响应
+flowchart TD
+    A[💻 用戶] --> B{🔄 Worker}
+    B --> C[🎭 身份偽造]
+    C --> D[💳 積分扣除]
+    D --> E[🎨 圖像生成]
+    E --> F[📦 記錄儲存]
+    F --> G[🔼 上游服務]
+    G --> H[🖼️ 返回圖片]
+    H --> I[✨ 格式轉換]
+    I --> J[📤 返回用戶]
 ```
 
-### 🧩 核心模块详解
+### 核心模塊
 
-| 模块 | 技术实现 | 难度 | 功能描述 |
-|------|----------|------|----------|
-| **🎭 身份伪造** | `generateFingerprint()`<br>`generateRandomIP()` | ⭐⭐☆ | 模拟真实用户指纹和IP地址，绕过基础风控 |
-| **💳 积分管理** | `/api/credits/deduct` | ⭐☆☆ | 预扣积分机制，确保服务可用性 |
-| **🎨 图像生成** | `FormData` + Multipart | ⭐⭐☆ | 构造上游服务所需的表单数据格式 |
-| **📊 日志系统** | `Logger` 类 + 实时流 | ⭐⭐⭐ | 面向对象日志记录，支持实时调试展示 |
-| **🔄 流式响应** | `TransformStream` API | ⭐⭐⭐⭐ | 实现类ChatGPT的流式输出体验 |
-
-### 💻 代码结构
-
-```
-ai-generator-flux-pure.js
-├── 🏗️ 核心配置 (CONFIG)
-│   ├── 上游服务端点
-│   ├── 模型参数预设
-│   └── 响应模板定义
-├── 🔀 请求路由 (fetch)
-│   ├── CORS 预处理
-│   ├── Web UI 路由
-│   └── API 端点分发
-├── 🎯 业务逻辑
-│   ├── Logger 类 📝
-│   ├── performUpstreamGeneration 🚀
-│   ├── handleChatCompletions 💬
-│   └── handleImageGenerations 🖼️
-├── 🛠️ 工具函数
-│   ├—— 认证验证
-│   ├—— 错误处理
-│   └—— 响应构造
-└── 🌐 Web 界面
-    └── 服务端渲染 UI
-```
+- **HistoryManager**: 歷史記錄管理
+- **Logger**: 日誌系統
+- **performUpstreamGeneration**: 生成邏輯
+- **streamResponse**: 流式輸出
 
 ---
 
-## 🚀 进阶功能
+## 🔧 故障排除
 
-### 🔐 安全配置
+### 常見問題
 
-```javascript
-// 环境变量配置示例
-API_MASTER_KEY = "sk-your-secret-key-here"  // 访问密钥
-ENABLE_RATE_LIMIT = true                    // 速率限制
-MAX_REQUESTS_PER_MINUTE = 10               // 频率控制
-```
-
-### 📊 监控指标
-
-- ✅ 请求成功率监控
-- ⏱️ 响应时间追踪  
-- 🖼️ 生成图片数量统计
-- 🔄 上游服务状态检查
+| 問題 | 解決方案 |
+|------|----------|
+| 🚫 401 認證失敗 | 檢查 `API_MASTER_KEY` 環境變數 |
+| 🐢 響應超時 | 等待上游服務恢復 |
+| 💸 積分不足 | 等待額度重置 |
+| 💾 KV 不可用 | 自動降級到 LocalStorage |
 
 ---
 
-## 🛠️ 故障排除
+## 🔜 更新日誌
 
-### 常见问题解决方案
+### v2.6.0 (2025-11-28)
+- ✨ 新增多張圖片生成功能
+- 🎨 新增 10 種風格預設
+- 📚 新增完整歷史記錄系統
+- 🔞 支持成人內容模型
+- 📊 新增統計分析面板
+- 📥 支持 JSON/CSV 導出
 
-| 问题现象 | 可能原因 | 解决方案 |
-|---------|----------|----------|
-| 🚫 401 认证失败 | API密钥错误 | 检查环境变量 `API_MASTER_KEY` 配置 |
-| 🐢 响应超时 | 上游服务延迟 | 调整超时设置或重试机制 |
-| 💸 积分不足 | 上游额度耗尽 | 等待额度重置或更换账户 |
-| 🔄 格式错误 | 请求格式不匹配 | 验证 OpenAI 兼容性设置 |
-
-### 🔍 调试技巧
-
-1. **使用开发者驾驶舱** - 实时查看完整请求链路
-2. **检查网络日志** - 分析上游服务响应
-3. **验证环境变量** - 确认配置正确性
-4. **监控资源用量** - 确保 Worker 配额充足
+### v2.4.0 (2025-11-26)
+- 精簡化為純文生圖
+- 鎖定 Flux Schnell 模型
+- 增強 Web UI 日誌
 
 ---
 
-## 🌟 项目演进路线
+## 👥 貢獻
 
-<div align="center">
-
-| 版本 | 状态 | 核心特性 | 技术突破 |
-|:---:|:---:|:---|:---|
-| **v1.0** | ✅ 完成 | 基础 API 转发 | 概念验证 |
-| **v2.0** | ✅ 完成 | 多模型支持 | 功能扩展 |
-| **v2.4** | 🎯 **当前** | **Flux 纯净版** | 架构精简 |
-| **v3.0** | 🚧 规划 | 智能容错 + 动态配置 | 健壮性提升 |
-| **v4.0** | 🌌 愿景 | 多源适配 + 插件化 | 生态扩展 |
-
-</div>
-
-### 🎯 未来规划
-
-- **🔧 智能容错机制** - 上游异常自动恢复
-- **📈 动态配置系统** - 热更新无需重新部署  
-- **🌐 多源支持** - 适配更多 AI 绘画服务
-- **🔌 插件化架构** - 模块化扩展能力
+歡迎提交 Issue 和 Pull Request！
 
 ---
 
-## 🤝 贡献指南
+## 📜 許可證
 
-我们欢迎所有形式的贡献！无论是代码改进、文档完善，还是创意想法。
-
-### 💡 如何参与
-
-1. **Fork 项目** - 创建你的个人副本
-2. **功能开发** - 实现新功能或修复问题
-3. **测试验证** - 确保代码质量
-4. **提交 PR** - 分享你的改进
-
-### 🎯 急需贡献
-
-- 🔧 错误处理优化
-- 📚 文档完善
-- 🧪 测试用例编写
-- 🌍 多语言支持
-
-> **开源精神**: 每一次贡献，无论大小，都在为技术社区增添价值。让我们一起构建更美好的开源生态！✨
-
----
-
-## 📄 许可证
-
-本项目采用 **Apache License 2.0** 开源协议。
-
-**你可以自由地:**
-- ✅ 商业使用
-- ✅ 修改代码  
-- ✅ 分发副本
-- ✅ 专利使用
-
-**你需要:**
-- 📝 保留版权声明
-- 📝 声明代码变更
-
-这是一个对商业友好的开源协议，鼓励广泛采用和创新。
-
----
-
-## 📞 支持与联系
-
-- 🐛 **问题反馈**: [GitHub Issues](https://github.com/lza6/ai-generator-2api-cfwork/issues)
-- 📚 **使用文档**: [项目 Wiki](https://github.com/lza6/ai-generator-2api-cfwork/wiki)  
-- 💬 **技术讨论**: [Discussions](https://github.com/lza6/ai-generator-2api-cfwork/discussions)
+Apache License 2.0
 
 ---
 
 <div align="center">
 
-## 🎉 开始创造吧！
+## 🎉 開始使用
 
-**让代码指引你的创意，让 AI 赋能你的想象。**
+**讓 AI 賦能你的創意**
 
-[![开始使用](https://img.shields.io/badge/🎯_立即体验-生成你的第一幅AI画作-00b894?style=for-the-badge&logo=ai&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/lza6/ai-generator-2api-cfwork)
+[![立即體驗](https://img.shields.io/badge/🎯_立即體驗-生成你的第一張AI畫作-00b894?style=for-the-badge&logo=ai&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
 
-*星辰大海，代码为舟，创意作帆。🚀*
+*✨ 星辰大海，代碼為舟，創意作帆 🚀*
 
 </div>
