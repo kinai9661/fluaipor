@@ -4,12 +4,13 @@
 
 ![版本](https://img.shields.io/badge/版本-v2.6.0-f59e0b?style=for-the-badge&logo=star&logoColor=white)
 ![許可證](https://img.shields.io/badge/許可證-Apache_2.0-3b82f6?style=for-the-badge&logo=apache&logoColor=white)
-![部署](https://img.shields.io/badge/部署-Cloudflare_Workers-orange?style=for-the-badge&logo=cloudflare&logoColor=white)
+![部署](https://img.shields.io/badge/部署-Multi_Platform-orange?style=for-the-badge)
 ![模型](https://img.shields.io/badge/模型-Flux_Pro-brightgreen?style=for-the-badge&logo=ai&logoColor=white)
 
 **全功能 AI 繪畫 API 轉換器 · 支持多圖生成 + 風格預設 + 歷史記錄 + NSFW**
 
-[![部署到 Cloudflare](https://img.shields.io/badge/🚀_一鍵部署-Cloudflare_Workers-ff6900?style=for-the-badge&logo=cloudflare&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
+[![部署到 Cloudflare](https://img.shields.io/badge/🚀_Cloudflare-Workers-ff6900?style=for-the-badge&logo=cloudflare&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
+[![部署到 Zeabur](https://img.shields.io/badge/🚀_Zeabur-一鍵部署-7c3aed?style=for-the-badge)](https://zeabur.com)
 
 </div>
 
@@ -21,15 +22,15 @@
 
 | 🖼️ 多圖生成 | 🎨 風格預設 | 📚 歷史記錄 | 🔞 NSFW 支持 |
 |:---:|:---:|:---:|:---:|
-| **1-4 張圖片**<br>一次生成多張 | **10 種風格**<br>預設模板 | **KV 存儲**<br>雲端保存 | **成人模型**<br>合法支持 |
+| **1-4 張圖片**<br>一次生成多張 | **10 種風格**<br>預設模板 | **雲端存儲**<br>持久保存 | **成人模型**<br>合法支持 |
 
 </div>
 
 ### 🎆 核心特性
 
 - **✨ 多張圖片生成**: 一次生成 1-4 張圖片，提升效率
-- **🎨 風格預設系統**: 10 種內置藝術風格（寫實、動漫、賭博龐克等）
-- **📚 完整歷史記錄**: Cloudflare KV 雲端存儲 + LocalStorage 本地備份
+- **🎨 風格預設系統**: 10 種內置藝術風格（寫實、動漫、跭博龐克等）
+- **📚 完整歷史記錄**: Cloudflare KV / Zeabur 持久化存儲
 - **📊 統計分析**: 按模型、風格、日期分類統計
 - **📥 數據導出**: 支持 JSON/CSV 格式導出
 - **🔞 成人內容**: 支持 Flux Adult 模型（flux-kontext-por）
@@ -39,21 +40,63 @@
 
 ## 🚀 快速開始
 
-### 方案一：一鍵部署（推薦）
+### 方案 A：Cloudflare Workers（推薦 - 免費）
 
-1. **點擊部署按鈕** → 登入 Cloudflare 帳戶
-2. **項目命名** → 例如 `my-flux-api`
-3. **配置環境變數**:
-   - `API_MASTER_KEY`: 你的訪問密鑰（必須）
-4. **儲存部署** → 完成！🎉
+✅ **優勢**：全球 CDN、極低延遲、每日 10萬請求免費
 
-### 方案二：手動部署
+1. **點擊一鍵部署** → 登入 Cloudflare 帳戶
+2. **配置環境變量**：`API_MASTER_KEY`
+3. **完成部署** 🎉
+
+📚 **詳細教程**：查看 [Cloudflare 部署指南](#cloudflare-workers-部署)
+
+### 方案 B：Zeabur（推薦 - 持久化存儲）
+
+✅ **優勢**：持久化硬碟、自動部署、無需配置
+
+1. **Fork 本倉庫**
+2. **連接 Zeabur** 到你的 GitHub
+3. **掛載硬碟** 至 `/data` 目錄
+4. **設定環境變量**
+
+📚 **詳細教程**：查看 [Zeabur 部署指南](ZEABUR_DEPLOYMENT.md)
+
+### 方案 C：手動部署
 
 ```bash
 # 克隆倉庫
 git clone https://github.com/kinai9661/fluaipor.git
 cd fluaipor
 
+# Cloudflare Workers
+wrangler login
+wrangler deploy
+
+# Zeabur (本地測試)
+npm install
+npm start
+```
+
+---
+
+## 📊 部署平台對比
+
+| 特性 | Cloudflare Workers | Zeabur |
+|------|-------------------|--------|
+| **費用** | ✅ 免費 (10萬請求/天) | 💵 $5/月起 |
+| **持久化存儲** | KV (1GB 免費) | ✅ 硬碟 (1GB+) |
+| **部署速度** | ⚡️ 極快 (< 1分鐘) | 🐌 中等 (2-3分鐘) |
+| **全球 CDN** | ✅ 內建 | ❌ 需額外配置 |
+| **自動部署** | ❌ 手動 | ✅ Git Push 自動 |
+| **適用場景** | 高併發、無狀態 | 需持久化、全功能 |
+
+---
+
+## 🛠️ Cloudflare Workers 部署
+
+### 快速部署
+
+```bash
 # 安裝 Wrangler
 npm install -g wrangler
 
@@ -64,28 +107,41 @@ wrangler login
 wrangler deploy
 ```
 
-### 💾 KV 存儲配置（啟用歷史記錄）
+### KV 存儲配置（啟用歷史記錄）
 
-1. **創建 KV Namespace**:
 ```bash
+# 創建 KV Namespace
 wrangler kv:namespace create "IMAGE_HISTORY"
-```
 
-2. **在 `wrangler.toml` 中配置**:
-```toml
-name = "fluaipor"
-main = "worker.js"
-compatibility_date = "2024-01-01"
-
+# 編輯 wrangler.toml
 [[kv_namespaces]]
 binding = "IMAGE_HISTORY"
-id = "YOUR_KV_NAMESPACE_ID"  # 從上一步獲取
-```
+id = "YOUR_KV_NAMESPACE_ID"
 
-3. **重新部署**:
-```bash
+# 重新部署
 wrangler deploy
 ```
+
+---
+
+## ⚙️ 環境變量配置
+
+### 必須變量
+
+| 變量名 | 說明 | 預設值 |
+|----------|------|----------|
+| `API_MASTER_KEY` | API 訪問密鑰 | `1` (不安全) |
+
+### 可選變量 (Zeabur)
+
+| 變量名 | 說明 | 預設值 |
+|----------|------|----------|
+| `PORT` | 服務端口 | `3000` |
+| `STORAGE_PATH` | 存儲路徑 | `/data` |
+
+**設定方法**：
+- **Cloudflare**: Dashboard → Workers → Settings → Variables
+- **Zeabur**: Dashboard → Service → Variables
 
 ---
 
@@ -93,13 +149,14 @@ wrangler deploy
 
 ### 1. 🌐 Web 界面
 
-訪問 Worker 地址體驗完整功能：
+訪問你的部署地址：
 
 ```
-https://你的項目名.workers.dev
+https://your-worker.workers.dev  # Cloudflare
+https://your-app.zeabur.app     # Zeabur
 ```
 
-**功能面板**:
+**功能面板**：
 - 🖼️ **Gallery**: 圖片生成主面板
 - 📚 **History**: 歷史記錄瀏覽
 - 📊 **Stats**: 統計數據分析
@@ -108,7 +165,7 @@ https://你的項目名.workers.dev
 
 #### 聊天接口（支持多圖）
 ```bash
-curl -X POST https://your-worker.workers.dev/v1/chat/completions \
+curl -X POST https://your-api.com/v1/chat/completions \
   -H "Authorization: Bearer YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -121,7 +178,7 @@ curl -X POST https://your-worker.workers.dev/v1/chat/completions \
 
 #### 圖片生成接口
 ```bash
-curl -X POST https://your-worker.workers.dev/v1/images/generations \
+curl -X POST https://your-api.com/v1/images/generations \
   -H "Authorization: Bearer YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -142,17 +199,11 @@ GET /v1/history?limit=50
 GET /v1/history/export?format=json
 GET /v1/history/export?format=csv
 
-# 刪除記錄
-POST /v1/history/delete
-{"id": "record-id"}
+# 刪除記錄 (Zeabur)
+DELETE /v1/history/{id}
 
 # 統計數據
 GET /v1/history/stats
-```
-
-#### 風格列表
-```bash
-GET /v1/styles
 ```
 
 ---
@@ -167,7 +218,7 @@ GET /v1/styles
 | `oil-painting` | 油畫風 | 古典藝術質感 |
 | `watercolor` | 水彩風 | 柔和色彩、藝術感 |
 | `3d-render` | 3D 渲染 | Unreal Engine 高品質 CGI |
-| `sketch` | 素描風 | 銉筆手繪風格 |
+| `sketch` | 素描風 | 醉筆手繪風格 |
 | `fantasy` | 奇幻風 | 魔幻史詩風格 |
 | `minimalist` | 極簡風 | 現代簡約設計 |
 | `nsfw` | 成人風 🔞 | 藝術裸體、成熟主題 |
@@ -181,26 +232,6 @@ GET /v1/styles
 | `flux-schnell` | ⚡️ 快 | ⭐️⭐️⭐️ | 1 學分 | 適合快速生成 |
 | `flux-1.1-pro` | 🐢 中 | ⭐️⭐️⭐️⭐️⭐️ | 2 學分 | 專業級品質 |
 | `flux-kontext-por` | ⚡️ 快 | ⭐️⭐️⭐️⭐️ | 1 學分 | 成人內容 🔞 |
-
----
-
-## 🔧 配置參數
-
-### 環境變數
-
-| 變數名 | 必須 | 預設值 | 說明 |
-|----------|------|---------|------|
-| `API_MASTER_KEY` | 是 | - | API 訪問密鑰 |
-| `IMAGE_HISTORY` (KV) | 否 | - | 歷史記錄存儲 |
-
-### 請求參數
-
-| 參數 | 類型 | 範圍 | 說明 |
-|------|------|------|------|
-| `n` | 數字 | 1-4 | 生成圖片數量 |
-| `style` | 字串 | - | 風格預設 ID |
-| `model` | 字串 | - | 模型選擇 |
-| `size` | 字串 | 1:1, 16:9, 9:16 | 圖片比例 |
 
 ---
 
@@ -223,42 +254,18 @@ GET /v1/styles
 
 ---
 
-## 📚 技術架構
-
-### 系統流程
-
-```mermaid
-flowchart TD
-    A[💻 用戶] --> B{🔄 Worker}
-    B --> C[🎭 身份偽造]
-    C --> D[💳 積分扣除]
-    D --> E[🎨 圖像生成]
-    E --> F[📦 記錄儲存]
-    F --> G[🔼 上游服務]
-    G --> H[🖼️ 返回圖片]
-    H --> I[✨ 格式轉換]
-    I --> J[📤 返回用戶]
-```
-
-### 核心模塊
-
-- **HistoryManager**: 歷史記錄管理
-- **Logger**: 日誌系統
-- **performUpstreamGeneration**: 生成邏輯
-- **streamResponse**: 流式輸出
-
----
-
 ## 🔧 故障排除
 
 ### 常見問題
 
 | 問題 | 解決方案 |
 |------|----------|
-| 🚫 401 認證失敗 | 檢查 `API_MASTER_KEY` 環境變數 |
+| 🚫 401 認證失敗 | 檢查 `API_MASTER_KEY` 環境變量 |
 | 🐢 響應超時 | 等待上游服務恢復 |
 | 💸 積分不足 | 等待額度重置 |
 | 💾 KV 不可用 | 自動降級到 LocalStorage |
+
+📚 **更多故障排除**：查看 [Zeabur 部署指南](ZEABUR_DEPLOYMENT.md#故障排除)
 
 ---
 
@@ -271,11 +278,7 @@ flowchart TD
 - 🔞 支持成人內容模型
 - 📊 新增統計分析面板
 - 📥 支持 JSON/CSV 導出
-
-### v2.4.0 (2025-11-26)
-- 精簡化為純文生圖
-- 鎖定 Flux Schnell 模型
-- 增強 Web UI 日誌
+- 🚀 支持 Zeabur 部署
 
 ---
 
@@ -297,7 +300,8 @@ Apache License 2.0
 
 **讓 AI 賦能你的創意**
 
-[![立即體驗](https://img.shields.io/badge/🎯_立即體驗-生成你的第一張AI畫作-00b894?style=for-the-badge&logo=ai&logoColor=white)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
+[![Cloudflare](https://img.shields.io/badge/🌐_Cloudflare-全球加速-ff6900?style=for-the-badge)](https://deploy.workers.cloudflare.com/?url=https://github.com/kinai9661/fluaipor)
+[![Zeabur](https://img.shields.io/badge/💾_Zeabur-持久化存儲-7c3aed?style=for-the-badge)](ZEABUR_DEPLOYMENT.md)
 
 *✨ 星辰大海，代碼為舟，創意作帆 🚀*
 
