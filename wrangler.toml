@@ -1,0 +1,28 @@
+name = "fluaipor"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# KV 存儲配置（啟用歷史記錄功能）
+# 使用以下命令創建：
+# wrangler kv:namespace create "IMAGE_HISTORY"
+# 然後將輸出的 ID 填入下面的 id 欄位
+
+# [[kv_namespaces]]
+# binding = "IMAGE_HISTORY"
+# id = "YOUR_KV_NAMESPACE_ID"  # 替換為實際 ID
+
+# 環境變數（可選）
+# 如果不在此設定，請在 Cloudflare Dashboard 中配置
+# [vars]
+# API_MASTER_KEY = "your-secret-key-here"  # 不建議明文存儲
+
+# 部署配置
+[build]
+command = ""
+
+# 觀察檔案變化（開發模式）
+watch_dirs = ["./"]
+
+# 資源限制
+[limits]
+cpu_ms = 50  # CPU 時間限制（毫秒）
